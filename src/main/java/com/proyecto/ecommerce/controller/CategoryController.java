@@ -3,6 +3,9 @@ package com.proyecto.ecommerce.controller;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.function.Predicate;
+import java.util.stream.Collector;
+import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
@@ -61,4 +64,20 @@ public class CategoryController {
 		this.service.deleteCategory(categoryId);
         return new ResponseEntity<>("DELETED", HttpStatus.OK);
 	}
+	
+	/*
+	@GetMapping
+	@RequestMapping(value = "BKList", method = RequestMethod.GET)
+	public ResponseEntity<?> findWhereBK(){
+		List<Category> newList = service.findAll();
+		
+		Predicate<Category> catePredi = newCategory -> newCategory.getCategoryName().equals("ELF");
+		List<Category> BKList = newList.stream().filter(catePredi).collect(Collectors.toList());
+		
+		//List<Category> BKList = newList.stream().filter(newCategory -> newCategory.getCategoryName().equals("BK"))
+		//.collect(Collectors.toList());
+		
+		return new ResponseEntity<>(BKList, HttpStatus.OK);
+	}
+	*/
 }
