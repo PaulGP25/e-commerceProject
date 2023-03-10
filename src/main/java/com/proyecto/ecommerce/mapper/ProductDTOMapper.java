@@ -25,11 +25,10 @@ public class ProductDTOMapper{
 		Double price = p.getPrice();
 		String description = p.getDescription();
 		Boolean state = p.getState();
-		//String image = p.getImageUrl();
+		String image = p.getImageUrl();
 		List<Category> categories = p.getProductCategory().stream().map(x -> x.getCategory()).collect(Collectors.toList());
 		List<CategoryDTO> categoriesDTO = categories.stream().map(x -> mapper.toDto(x)).collect(Collectors.toList());
-		//p.getProductCategory().stream().map(t -> t.getCategory()).collect(Collectors.toList())
-		return new ProductDTO(productId, productName, price, description, state, categoriesDTO);
+		return new ProductDTO(productId, productName, price, description, state, image, categoriesDTO);
 	}
 	
 

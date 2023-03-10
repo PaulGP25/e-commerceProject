@@ -11,20 +11,20 @@ public class ProductDTO{
 		private Double price;
 		private String description;
 		private Boolean state;
-		//private String image;
+		private String image;
 		private List<CategoryDTO> categories;
 		
 		
 		
 		public ProductDTO(Integer productId, String productName, Double price, String description, Boolean state,
-				/*String imageUrl,*/ List<CategoryDTO> categories) {
+				String imageUrl, List<CategoryDTO> categories) {
 			super();
 			this.productId = productId;
 			this.productName = productName;
 			this.price = price;
 			this.description = description;
 			this.state = state;
-			//this.image = imageUrl;
+			this.image = imageUrl;
 			this.categories = categories;
 		}
 		
@@ -58,12 +58,12 @@ public class ProductDTO{
 		public void setState(Boolean state) {
 			this.state = state;
 		}
-		/*public String getImageUrl() {
+		public String getImageUrl() {
 			return image;
 		}
 		public void setImageUrl(String imageUrl) {
 			this.image = imageUrl;
-		}*/
+		}
 		public List<CategoryDTO> getCategories() {
 			return categories;
 		}
