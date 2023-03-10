@@ -1,6 +1,7 @@
 package com.proyecto.ecommerce.controller;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -14,6 +15,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.proyecto.ecommerce.dto.ProductDTO;
+import com.proyecto.ecommerce.mapper.ProductDTOMapper;
 import com.proyecto.ecommerce.model.Product;
 import com.proyecto.ecommerce.service.implement.ProductServiceImpl;
 
@@ -23,13 +26,29 @@ public class ProductController {
 
 	@Autowired
 	private ProductServiceImpl service;
+	@Autowired
+	private ProductDTOMapper mapper;
 	
+	@GetMapping
+	@RequestMapping()
+	public ResponseEntity<?> findAllDTO(){
+		//Una nueva lista de productos se llena con los productos obtenidos en el findAll
+		List<Product> products = this.service.findAll();
+		//Una nueva lista de productosDTO = a los productos obtenidos arriba, asignandolos a un stream() que es tambien una lista
+		//usando map() para transformar a otro objeto(tambien se puede para tipos de dato por ejemplo)
+		//en este caso transforma "x" que es Product, invocando al mapper y su metodo, insertandole el producto
+		//luego se colecta los datos ya transformados.....NOTA: 'mapper::toDto' es lo mismo que 'x -> mapper.toDto(x)'
+		List<ProductDTO> productDTO = products.stream().map(x -> mapper.toDto(x)).collect(Collectors.toList());
+		return new ResponseEntity<>(productDTO, HttpStatus.OK);
+	}
+	
+	/*
 	@GetMapping
 	//@RequestMapping(value = "list", method = RequestMethod.GET)
 	public ResponseEntity<?> findAll(){
 		List<Product> products = this.service.findAll();
 		return new ResponseEntity<>(products, HttpStatus.OK);
-	}
+	}*/
 	
 	@PostMapping
 	public ResponseEntity<?> addProduct(@RequestBody Product product){

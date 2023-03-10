@@ -35,6 +35,7 @@ public class Category implements Serializable{
 	@Column(name="image_url", nullable = false)
 	private String imageUrl;
 	
+	@JsonIgnore
 	@OneToMany(mappedBy ="category")
 	Set<ProductCategory> productCategory;
 	
@@ -45,6 +46,7 @@ public class Category implements Serializable{
 	*/
 	
 	public Category() {
+		
 	}
 
 
@@ -94,6 +96,16 @@ public class Category implements Serializable{
 
 	public void setImageUrl(String imageUrl) {
 		this.imageUrl = imageUrl;
+	}
+
+
+	public Set<ProductCategory> getProductCategory() {
+		return productCategory;
+	}
+
+
+	public void setProductCategory(Set<ProductCategory> productCategory) {
+		this.productCategory = productCategory;
 	}
 
 	/*

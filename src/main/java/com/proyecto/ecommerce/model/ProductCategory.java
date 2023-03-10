@@ -1,5 +1,7 @@
 package com.proyecto.ecommerce.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import jakarta.persistence.EmbeddedId;
 import jakarta.persistence.Entity;
 import jakarta.persistence.JoinColumn;
@@ -14,11 +16,13 @@ public class ProductCategory {
 	@EmbeddedId
 	ProductCategoryKey id;
 	
+	@JsonIgnore
 	@ManyToOne
 	@MapsId("productId")
 	@JoinColumn(name="product_id")
 	Product product;
 	
+	@JsonIgnore
 	@ManyToOne
 	@MapsId("categoryId")
 	@JoinColumn(name="category_id")

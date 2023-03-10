@@ -44,6 +44,7 @@ public class Product implements Serializable{
 	@Column(name = "image_url", nullable = false)
 	private String imageUrl;
 	
+	@JsonIgnore
 	@OneToMany(mappedBy = "product")
 	Set<ProductCategory> productCategory;
 	
@@ -60,6 +61,10 @@ public class Product implements Serializable{
 		// TODO Auto-generated constructor stub
 	}
 	 */
+	
+	public Product() {
+		// TODO Auto-generated constructor stub
+	}
 	
 	public Product(Integer productId, String productName, Double price, String description, Boolean state,
 			String imageUrl) {
@@ -118,6 +123,14 @@ public class Product implements Serializable{
 
 	public void setImageUrl(String imageUrl) {
 		this.imageUrl = imageUrl;
+	}
+
+	public Set<ProductCategory> getProductCategory() {
+		return productCategory;
+	}
+
+	public void setProductCategory(Set<ProductCategory> productCategory) {
+		this.productCategory = productCategory;
 	}
 
 	/*

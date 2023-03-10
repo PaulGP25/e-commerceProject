@@ -6,7 +6,7 @@ import com.proyecto.ecommerce.model.Product;
 
 public interface ProductService {
 
-public List<Product> findAll();
+	public List<Product> findAll();
 	
 	public Product addProduct(Product product);
 	
