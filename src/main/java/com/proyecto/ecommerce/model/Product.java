@@ -17,6 +17,7 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.JoinTable;
 import jakarta.persistence.ManyToMany;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 
 @Entity
@@ -42,6 +43,9 @@ public class Product implements Serializable{
 	
 	@Column(name = "image_url", nullable = false)
 	private String imageUrl;
+	
+	@OneToMany(mappedBy = "product")
+	Set<ProductCategory> productCategory;
 	
 	/*
 	@ManyToMany(cascade = { CascadeType.ALL })

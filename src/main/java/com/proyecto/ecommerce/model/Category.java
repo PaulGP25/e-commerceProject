@@ -15,6 +15,7 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.ManyToMany;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 
@@ -33,6 +34,9 @@ public class Category implements Serializable{
 	private String categoryName;
 	@Column(name="image_url", nullable = false)
 	private String imageUrl;
+	
+	@OneToMany(mappedBy ="category")
+	Set<ProductCategory> productCategory;
 	
 	/*
 	@ManyToMany(mappedBy = "categories")
