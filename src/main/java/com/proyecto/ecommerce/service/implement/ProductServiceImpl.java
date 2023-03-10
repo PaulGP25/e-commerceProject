@@ -49,6 +49,7 @@ public class ProductServiceImpl implements ProductService{
 		this.productRepository.deleteById(productId);
 	}
 
+	/*
 	public Product assignProductToCategory(Integer productId, Integer categoryId) {
 		Set<Category> categorySet = null;
 		Product product = this.productRepository.findById(productId).get();
@@ -58,5 +59,6 @@ public class ProductServiceImpl implements ProductService{
 		product.setCategories(categorySet);
 		return this.productRepository.save(product);
 	}
+	*/
 
 }

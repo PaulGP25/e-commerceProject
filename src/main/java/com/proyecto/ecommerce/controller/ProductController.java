@@ -58,9 +58,10 @@ public class ProductController {
         return new ResponseEntity<>("DELETED", HttpStatus.OK);
 	}
 	
+	/*//ejemplo
 	@PutMapping("/{productId}/category/{categoryId}")
 	public Product assignProductToCategory(@PathVariable Integer productId, @PathVariable Integer categoryId){
 		 return service.assignProductToCategory(productId, categoryId);
 	}
-	
+	*/
 }

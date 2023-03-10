@@ -43,6 +43,7 @@ public class Product implements Serializable{
 	@Column(name = "image_url", nullable = false)
 	private String imageUrl;
 	
+	/*
 	@ManyToMany(cascade = { CascadeType.ALL })
     @JoinTable(
         name = "Product_Category", 
@@ -54,7 +55,8 @@ public class Product implements Serializable{
 	public Product() {
 		// TODO Auto-generated constructor stub
 	}
-
+	 */
+	
 	public Product(Integer productId, String productName, Double price, String description, Boolean state,
 			String imageUrl) {
 		super();
@@ -114,6 +116,7 @@ public class Product implements Serializable{
 		this.imageUrl = imageUrl;
 	}
 
+	/*
 	public Set<Category> getCategories() {
 		return categories;
 	}
@@ -121,7 +124,7 @@ public class Product implements Serializable{
 	public void setCategories(Set<Category> categories) {
 		this.categories = categories;
 	}
-
+	*/
 	
 	
 	

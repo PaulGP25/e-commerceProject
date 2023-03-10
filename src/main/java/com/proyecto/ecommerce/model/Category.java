@@ -34,9 +34,11 @@ public class Category implements Serializable{
 	@Column(name="image_url", nullable = false)
 	private String imageUrl;
 	
+	/*
 	@ManyToMany(mappedBy = "categories")
 	@JsonIgnore
     private Set<Product> products = new HashSet<>();
+	*/
 	
 	public Category() {
 	}
@@ -90,7 +92,7 @@ public class Category implements Serializable{
 		this.imageUrl = imageUrl;
 	}
 
-
+	/*
 	public Set<Product> getProducts() {
 		return products;
 	}
@@ -99,7 +101,7 @@ public class Category implements Serializable{
 	public void setProducts(Set<Product> products) {
 		this.products = products;
 	}
-
+	*/
 	
 	
 	
