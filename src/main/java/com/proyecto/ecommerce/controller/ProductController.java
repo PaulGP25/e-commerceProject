@@ -1,6 +1,8 @@
 package com.proyecto.ecommerce.controller;
 
 import java.util.List;
+import java.util.Optional;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,9 +17,12 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.proyecto.ecommerce.dto.CategoryDTO;
 import com.proyecto.ecommerce.dto.ProductDTO;
+import com.proyecto.ecommerce.mapper.CategoryDTOMapper;
 import com.proyecto.ecommerce.mapper.ProductDTOMapper;
 import com.proyecto.ecommerce.model.Product;
+import com.proyecto.ecommerce.model.ProductCategory;
 import com.proyecto.ecommerce.service.implement.ProductServiceImpl;
 
 @RestController
@@ -31,12 +36,12 @@ public class ProductController {
 	
 	@GetMapping
 	@RequestMapping()
-	public ResponseEntity<?> findAllDTO(){
+	public ResponseEntity<?> findAll(){
 		//Una nueva lista de productos se llena con los productos obtenidos en el findAll
 		List<Product> products = this.service.findAll();
 		//Una nueva lista de productosDTO = a los productos obtenidos arriba, asignandolos a un stream() que es tambien una lista
 		//usando map() para transformar a otro objeto(tambien se puede para tipos de dato por ejemplo)
-		//en este caso transforma "x" que es Product, invocando al mapper y su metodo, insertandole el producto
+		//en este caso transforma "x" que es la lista Product, invocando al mapper y su metodo, insertandole el producto
 		//luego se colecta los datos ya transformados.....NOTA: 'mapper::toDto' es lo mismo que 'x -> mapper.toDto(x)'
 		List<ProductDTO> productDTO = products.stream().map(x -> mapper.toDto(x)).collect(Collectors.toList());
 		return new ResponseEntity<>(productDTO, HttpStatus.OK);
@@ -62,14 +67,6 @@ public class ProductController {
 		return new ResponseEntity<>(productUpdated, HttpStatus.OK);
 	}
 	
-	@GetMapping("{productId}")
-	public ResponseEntity<?> findProductById(@PathVariable Integer productId){
-		Product productFound = this.service.findProductById(productId);
-		 if(productFound == null) {
-			 return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-		 }
-		 return new ResponseEntity<>(productFound, HttpStatus.OK);
-	}
 	
 	@DeleteMapping("{productId}")
 	public ResponseEntity<?> deleteProduct(@PathVariable Integer productId){
@@ -83,4 +80,23 @@ public class ProductController {
 		 return service.assignProductToCategory(productId, categoryId);
 	}
 	*/
+	
+	@GetMapping("{productId}")
+	public ResponseEntity<?> findProductByIdDTO(@PathVariable Integer productId){
+	    List<Product> product = this.service.findAll();
+	    List<ProductDTO> productDTO = product.stream().map(x -> mapper.toDto(x)).filter(x -> x.getProductId().equals(productId)).collect(Collectors.toList());
+	    if(productDTO.isEmpty()) {
+	    	return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+	    }
+	    return new ResponseEntity<>(productDTO, HttpStatus.OK);
+	}
+	
+	/*
+	@GetMapping("{productId}")
+	public ResponseEntity<?> findProductById(@PathVariable Integer productId){
+	    Product productFound = this.service.findProductById(productId);
+	    return new ResponseEntity<>(productFound, HttpStatus.OK);
+	}
+	*/
+	
 }
