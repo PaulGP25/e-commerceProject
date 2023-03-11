@@ -8,9 +8,10 @@ import com.proyecto.ecommerce.model.Category;
 @Component
 public class CategoryDTOMapper {
 	public CategoryDTO toDto(Category c) {
-		Integer categoryId = c.getCategoryId();
 		String categoryName = c.getCategoryName();
+		String description = c.getDescription();
+		String imageUrl = c.getImageUrl();
 		
-		return new CategoryDTO(categoryId, categoryName);
+		return new CategoryDTO(categoryName, description, imageUrl);
 	}
 }
